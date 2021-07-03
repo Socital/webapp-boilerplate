@@ -5,7 +5,6 @@ class SampleController {
         this.service = new SampleService(logger)
     }
     post (req, res) {
-        console.log()
         const result = this.service.createAndPrintASample(req.body)
         res.json({result})
     }

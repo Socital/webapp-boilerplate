@@ -16,7 +16,7 @@ export default class logger {
 
     async start () {
         this.logger.info(`Starting service on ${this.host}:${this.port}`)
-        this.listen()
+        await this.listen()
     }
 
     async listen () {

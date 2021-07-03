@@ -1,11 +1,18 @@
-import { Environment, Test } from 'socital-lib'
+import fetch from 'node-fetch'
+import { assert } from 'chai'
 
 describe('msc-skeleton [routes] [test] [method] ', function () {
-    const env = new Environment({pjson: {name: 'MSC_SKELETON'}})
-    const libTestInstance = new Test({ env })
-    libTestInstance.initialize()
-
-    const serviceURI = `${libTestInstance.env.vars.APP_ROOT_URI}:${libTestInstance.env.vars.SERVER_PORT}`
-
-    it('should make a useful assertion', (done) => { done() })
+    it('should make a useful assertion', async (done) => {
+        const options = { method: 'POST', body: { foo: 'hello' } }
+        let response = await fetch('http://localhost:3000/sample', options)
+        try {
+            let json = await response.json()
+            assert.equal(json, {
+                result: { date }
+            })
+            done()
+        } catch (err) {
+            done(err)
+        }
+    })
 })
