@@ -6,7 +6,9 @@ const router = (deps) => {
     const controller = new SampleController(deps.logger)
 
     result.post('/sample', (req, res) => controller.post(req, res))
-    result.get('/sample', () => console.log('Put sample'))
+    result.get('/sample', (req, res) => {
+        res.json({ results: [{ name: 'sample' }] })
+    })
     result.put('/sample', () => console.log('Put sample'))
     result.delete('/sample', () => console.log('Delete sample'))
 

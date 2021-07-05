@@ -8,6 +8,7 @@ export default class logger {
         this.app = express()
         this.app.disable('x-powered-by')
         this.app.use('', [
+            this.handleCors,
             express.urlencoded({ extended: true }),
             express.json({ limit: '50mb' })
         ])
@@ -40,6 +41,22 @@ export default class logger {
                 return resolve()
             })
         })
+    }
+
+    handleCors (req, res, next) {
+        if (req.method === 'OPTIONS') {
+            var headers = {}
+            headers['Access-Control-Allow-Origin'] = '*'
+            headers['Access-Control-Allow-Methods'] = 'POST, GET, PUT, DELETE, OPTIONS'
+            headers['Access-Control-Allow-Credentials'] = false
+            headers['Access-Control-Max-Age'] = '86400'
+            headers['Access-Control-Allow-Headers'] = 'X-Requested-With, Authorization, X-HTTP-Method-Override, Content-Type, Accept, X-SOCITAL-DOMAIN'
+            res.writeHead(200, headers)
+            return res.end()
+        }
+        res.header('Access-Control-Allow-Origin', '*')
+        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Authorization, Content-Type, Accept')
+        next()
     }
 
     unhandledRejection (err) {
