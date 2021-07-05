@@ -13,7 +13,9 @@
     ]
   },
   "scripts": {
-    "test": "mocha -r ts-node/register --extension js backend/test/** frontend/test/** --recursive --exit -b"
+    "backend:dev": "cd backend && yarn dev",
+    "frontend:dev": "cd frontend && yarn dev",
+    "test": "mocha -r ts-node/register --extension js backend/test/** --recursive --exit -b"
   },
   "dependencies": {
     "mocha": "^9.0.1"
