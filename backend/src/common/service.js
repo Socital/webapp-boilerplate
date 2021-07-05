@@ -7,7 +7,11 @@ export default class logger {
         this.logger = logger
         this.app = express()
         this.app.disable('x-powered-by')
-        this.app.use(express.json({}))
+        this.app.use('', [
+            express.urlencoded({ extended: true }),
+            express.json({ limit: '50mb' })
+        ])
+
         process.on('uncaughtException', this.uncaughtException.bind(this))
         process.on('unhandledRejection', this.unhandledRejection.bind(this))
         process.on('SIGTERM', async () => { await this.stop() })

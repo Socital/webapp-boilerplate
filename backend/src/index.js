@@ -13,7 +13,7 @@ service.start()
     service.app.use(sampleRoute({ logger }))
     // Add a generic error handler
     service.app.use((err, req, res, next) => {
-        res.status(500).send('Something broke!')
+        res.status(500).json({ error: 'Something broke!' })
     })
 })
 
